@@ -9,11 +9,14 @@
         }
     ],
     "require": {
-        "fabpot/goutte": "^4.0@dev"
+        "fabpot/goutte": "3.2.3"
     },
     "autoload": {
         "psr-4": {
             "RssScraper\\": "src/"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.0"
     }
 }
