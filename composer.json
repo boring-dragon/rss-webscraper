@@ -15,8 +15,5 @@
         "psr-4": {
             "RssScraper\\": "src/"
         }
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^5.0"
     }
 }
