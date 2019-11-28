@@ -1,0 +1,22 @@
+{
+    "name": "jinas/RssScraper",
+    "description": "Avas scraper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Jinas",
+            "email": "j@live.mv"
+        }
+    ],
+    "require": {
+        "fabpot/goutte": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "RssScraper\\": "src/"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.0"
+    }
+}
