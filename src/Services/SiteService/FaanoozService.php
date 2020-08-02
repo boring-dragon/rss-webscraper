@@ -8,13 +8,13 @@ class FaanoozService implements IService
 {
     public static function dispatch($articles = [])
     {
-        $articlesitems = array();
+        $articlesitems = [];
 
-        $emihaaru = new \Jinas\RssScraper\Extractors\EFaanooz;
+        $emihaaru = new \Jinas\RssScraper\Extractors\EFaanooz();
 
         foreach ($articles as $article) {
-            $link = $article["link"];
-            $date = $article["pubDate"];
+            $link = $article['link'];
+            $date = $article['pubDate'];
             $articlesitems[] = $emihaaru->extract($link, $date);
         }
 

@@ -11,8 +11,8 @@ Todo:
 
 namespace Jinas\RssScraper\Extractors;
 
-use Jinas\RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
+use Jinas\RssScraper\Interfaces\IExtractor;
 
 class EThiladhun implements IExtractor
 {
@@ -27,7 +27,7 @@ class EThiladhun implements IExtractor
     protected $url;
 
     /**
-     * __construct
+     * __construct.
      *
      * @return void
      */
@@ -37,23 +37,20 @@ class EThiladhun implements IExtractor
     }
 
     /**
-     * extract
+     * extract.
      *
-     * @param  mixed $url
-     * @param  mixed $date
-     * @param  mixed $guid
+     * @param mixed $url
+     * @param mixed $date
+     * @param mixed $guid
      *
      * @return array
-     * 
-     * @access public
      */
     public function extract($url, $date = null, $guid = null)
     {
-
         $this->url = $url;
         $this->date = $date;
 
-        $this->guid = $guid = str_replace("https://thiladhun.com/", "", $url);
+        $this->guid = $guid = str_replace('https://thiladhun.com/', '', $url);
 
         $crawler = $this->client->request('GET', $url);
 
@@ -85,23 +82,21 @@ class EThiladhun implements IExtractor
             $this->image = $image;
         });
 
-
         $crawler->filter('a[class*="entry-author__name"]')->each(function ($node) {
             $author = $node->text();
             $this->author = $author;
         });
 
-
         $data = [
-            "service" => "Thiladhun News",
-            "title" => $this->title,
-            "image" => $this->image,
-            "content" => $this->content,
-            "date" => $this->date,
-            "url" => $this->url,
-            "author" => $this->author,
-            "guid" => $this->guid,
-            "word_count" => str_word_count($this->content)
+            'service'    => 'Thiladhun News',
+            'title'      => $this->title,
+            'image'      => $this->image,
+            'content'    => $this->content,
+            'date'       => $this->date,
+            'url'        => $this->url,
+            'author'     => $this->author,
+            'guid'       => $this->guid,
+            'word_count' => str_word_count($this->content),
         ];
 
         return $data;

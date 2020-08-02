@@ -8,13 +8,13 @@ class ThiladhunService implements IService
 {
     public static function dispatch($articles = [])
     {
-        $articlesitems = array();
+        $articlesitems = [];
 
-        $emihaaru = new \Jinas\RssScraper\Extractors\EThiladhun;
+        $emihaaru = new \Jinas\RssScraper\Extractors\EThiladhun();
 
         foreach ($articles as $article) {
-            $link = $article["link"];
-            $date = $article["pubDate"];
+            $link = $article['link'];
+            $date = $article['pubDate'];
             $articlesitems[] = $emihaaru->extract($link, $date);
         }
 

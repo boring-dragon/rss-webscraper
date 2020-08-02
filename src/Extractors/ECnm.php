@@ -12,8 +12,8 @@ Todo:
 
 namespace Jinas\RssScraper\Extractors;
 
-use Jinas\RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
+use Jinas\RssScraper\Interfaces\IExtractor;
 
 class ECnm implements IExtractor
 {
@@ -27,9 +27,8 @@ class ECnm implements IExtractor
     protected $date;
     protected $url;
 
-
     /**
-     * __construct
+     * __construct.
      *
      * @return void
      */
@@ -39,13 +38,11 @@ class ECnm implements IExtractor
     }
 
     /**
-     * extract
+     * extract.
      *
-     * @param  mixed $url
-     * @param  mixed $date
-     * @param  mixed $guid
-     *
-     * @access public
+     * @param mixed $url
+     * @param mixed $date
+     * @param mixed $guid
      *
      * @return array
      */
@@ -55,13 +52,12 @@ class ECnm implements IExtractor
 
         parse_str($url, $get_array);
 
-        $this->guid = $get_array["https://cnm_mv/f/?id"];
+        $this->guid = $get_array['https://cnm_mv/f/?id'];
 
         //Need to fix the url hang issue
-        $this->url = "https://cnm.mv/f/?id=" . $this->guid;
+        $this->url = 'https://cnm.mv/f/?id='.$this->guid;
 
         $crawler = $this->client->request('GET', $this->url);
-
 
         $crawler->filter('h1')->each(function ($node) {
             $title = $node->text();
@@ -71,7 +67,7 @@ class ECnm implements IExtractor
         $crawler->filter('img[alt*="image"]')->each(function ($node) {
             $image = $node->attr('src');
             $trimeddata = str_replace('../', '', $image);
-            $this->image = "https://cnm.mv/" . $trimeddata;
+            $this->image = 'https://cnm.mv/'.$trimeddata;
         });
 
         $crawler->filter('div[class*="col fontf artT px-0 py-4"]')->each(function ($node) {
@@ -86,17 +82,16 @@ class ECnm implements IExtractor
         });
 
         $data = [
-            "service" => "CNM News",
-            "title" => $this->title,
-            "image" => $this->image,
-            "content" => $this->content,
-            "date" => $this->date,
-            "url" => $this->url,
-            "author" => $this->author,
-            "guid" => $this->guid,
-            "word_count" => str_word_count($this->content)
+            'service'    => 'CNM News',
+            'title'      => $this->title,
+            'image'      => $this->image,
+            'content'    => $this->content,
+            'date'       => $this->date,
+            'url'        => $this->url,
+            'author'     => $this->author,
+            'guid'       => $this->guid,
+            'word_count' => str_word_count($this->content),
         ];
-
 
         return $data;
     }

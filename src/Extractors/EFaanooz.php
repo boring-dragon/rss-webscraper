@@ -9,9 +9,8 @@ Todo
 
 namespace Jinas\RssScraper\Extractors;
 
-use Jinas\RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
-use Jinas\RssScraper\Utils\Json;
+use Jinas\RssScraper\Interfaces\IExtractor;
 
 class EFaanooz implements IExtractor
 {
@@ -20,7 +19,7 @@ class EFaanooz implements IExtractor
     protected $title;
     protected $content;
     protected $image;
-    protected $tags = array();
+    protected $tags = [];
     protected $guid;
     protected $author;
     protected $date;
@@ -32,11 +31,11 @@ class EFaanooz implements IExtractor
     }
 
     /**
-     * extract
+     * extract.
      *
-     * @param  mixed $url
-     * @param  mixed $date
-     * @param  mixed $guid
+     * @param mixed $url
+     * @param mixed $date
+     * @param mixed $guid
      *
      * @return array
      */
@@ -46,12 +45,10 @@ class EFaanooz implements IExtractor
         $this->date = $date;
 
         //Trimming the guid from the url
-        $get_array = trim($url, "https://faanooz.com/");
+        $get_array = trim($url, 'https://faanooz.com/');
         $this->guid = $get_array;
 
-
         $crawler = $this->client->request('GET', $url);
-
 
         $crawler->filter('h1')->each(function ($node) {
             $title = $node->text();
@@ -66,7 +63,7 @@ class EFaanooz implements IExtractor
         /*
         $format = 'img[alt*="%s"]';
         $imagescr = sprintf($format,$this->title);
-        
+
 
         $crawler->filter($imagescr)->each(function ($node) {
             $image = $node->attr('src');
@@ -80,28 +77,24 @@ class EFaanooz implements IExtractor
             $this->tags[] = $tags;
         });
 
-
         $crawler->filter('div.entry-content.no-share')->each(function ($node) {
             $content = $node->text();
             $removeonespace = str_replace("\n", '', $content);
             $this->content = $removeonespace;
         });
 
-
-
         $data = [
-            "service" => "Faanooz",
-            "title" => $this->title,
-            "image" => $this->image,
-            "content" => $this->content,
-            "date" => $this->date,
-            "url" => $this->url,
-            "author" => $this->author,
-            "guid" => $this->guid,
-            "word_count" => str_word_count($this->content),
-            "tags" => $this->tags
+            'service'    => 'Faanooz',
+            'title'      => $this->title,
+            'image'      => $this->image,
+            'content'    => $this->content,
+            'date'       => $this->date,
+            'url'        => $this->url,
+            'author'     => $this->author,
+            'guid'       => $this->guid,
+            'word_count' => str_word_count($this->content),
+            'tags'       => $this->tags,
         ];
-
 
         return $data;
     }

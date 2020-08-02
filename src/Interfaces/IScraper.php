@@ -1,16 +1,15 @@
 <?php
+
 namespace Jinas\RssScraper\Interfaces;
 
 interface IScraper
 {
-    
-    
     /**
-     * get
+     * get.
      *
-     * @param  mixed $url
+     * @param mixed $url
      *
      * @return array
      */
-    public function get(string $url) : array;
+    public function get(string $url): array;
 }
