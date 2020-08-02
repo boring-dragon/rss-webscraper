@@ -1,5 +1,7 @@
 # RSS-WebScraper
 
+[![StyleCI](https://github.styleci.io/repos/284431797/shield?branch=master)](https://github.styleci.io/repos/284431797?branch=master)
+
 Tool that reads rss from dhivehi news sites and scrape the latest news articles.
 
 This tool was built a year ago. There might be few bugs here and there but I will try to improve and look into those later.
