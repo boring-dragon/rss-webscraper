@@ -3,12 +3,14 @@ namespace RssScraper\Interfaces;
 
 interface IScraper
 {
+    
+    
     /**
      * get
      *
      * @param  mixed $url
      *
-     * @return void
+     * @return array
      */
-    public function get($url);
+    public function get(string $url) : array;
 }

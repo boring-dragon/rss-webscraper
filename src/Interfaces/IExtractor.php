@@ -2,7 +2,20 @@
 
 namespace RssScraper\Interfaces;
 
+use DateTime;
+
 interface IExtractor
 {
-    public function extract($url,$date = null,$guid = null);
+
+
+    /**
+     * extract
+     *
+     * @param  mixed $url
+     * @param  mixed $date
+     * @param  mixed $guid
+     *
+     * @return array
+     */
+    public function extract(string $url, DateTime $date = null, int $guid = null);
 }

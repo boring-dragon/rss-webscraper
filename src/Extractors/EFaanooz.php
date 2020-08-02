@@ -1,11 +1,9 @@
 <?php
 /*
 
-
-░M░i░h░a░a░r░u░ ░S░c░r░a░p░e░r░
-
-TODOs:
-- filter content data more
+Todo
+- fix tags
+- fix image
 
 */
 
@@ -15,7 +13,7 @@ use RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
 use RssScraper\Utils\Json;
 
-class EMihaaru implements IExtractor
+class EFaanooz implements IExtractor
 {
     protected $client;
 
@@ -28,12 +26,6 @@ class EMihaaru implements IExtractor
     protected $date;
     protected $url;
 
-
-    /**
-     * __construct
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->client = new Client();
@@ -42,12 +34,9 @@ class EMihaaru implements IExtractor
     /**
      * extract
      *
-     * Mihaaru News Extractor. This function scraps title,content,author and date from the article
      * @param  mixed $url
      * @param  mixed $date
      * @param  mixed $guid
-     *
-     * @access public
      *
      * @return array
      */
@@ -55,7 +44,11 @@ class EMihaaru implements IExtractor
     {
         $this->url = $url;
         $this->date = $date;
-        $this->guid = $guid;
+
+        //Trimming the guid from the url
+        $get_array = trim($url, "https://faanooz.com/");
+        $this->guid = $get_array;
+
 
         $crawler = $this->client->request('GET', $url);
 
@@ -65,35 +58,39 @@ class EMihaaru implements IExtractor
             $this->title = $title;
         });
 
-        $crawler->filter('.container  img')->eq(3)->each(function ($node) {
+        $crawler->filter('.jeg_meta_author a')->each(function ($node) {
+            $author = $node->text();
+            $this->author = $author;
+        });
+
+        /*
+        $format = 'img[alt*="%s"]';
+        $imagescr = sprintf($format,$this->title);
+        
+
+        $crawler->filter($imagescr)->each(function ($node) {
             $image = $node->attr('src');
             $this->image = $image;
         });
 
+        */
 
-        $crawler->filter('.by-line address')->each(function ($node) {
-            $author = $node->text();
-            //Trim all the white spaces
-            $spacetrim = str_replace(' ', '', $author);
-            //Replace multiple spaces and newlines with a single space
-            $cleaneddata = trim(preg_replace('/\s\s+/', ' ', $spacetrim));
-            $this->author = $cleaneddata;
-        });
-
-        $crawler->filter('article')->each(function ($node) {
-            $content =  $node->text();
-
-            $input = str_replace("\n", '', $content);
-            $this->content = $input;
-        });
-
-        $crawler->filter('.article-tags')->each(function ($node) {
-            $tags[] =  $node->text();
+        $crawler->filter('.jeg_post_tags a')->each(function ($node) {
+            $tags[] = $node->text();
             $this->tags[] = $tags;
         });
 
+
+        $crawler->filter('div.entry-content.no-share')->each(function ($node) {
+            $content = $node->text();
+            $removeonespace = str_replace("\n", '', $content);
+            $this->content = $removeonespace;
+        });
+
+
+
         $data = [
-            "service" => "Mihaaru News",
+            "service" => "Faanooz",
             "title" => $this->title,
             "image" => $this->image,
             "content" => $this->content,
@@ -105,7 +102,6 @@ class EMihaaru implements IExtractor
             "tags" => $this->tags
         ];
 
-        //$data = Data::
 
         return $data;
     }

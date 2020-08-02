@@ -4,87 +4,75 @@ namespace RssScraper\Interfaces;
 
 interface IRssService
 {
-    /**
-     * __construct
-     *
-     * @return void
-     */
+
+    public const SERVICES = [
+        "mihaaru" => [
+            "Service"    => "Mihaaru Media",
+            "feed"      => "https://mihaaru.com/rss"
+        ],
+        "cnm" => [
+            "Service"    => "Cnm Media",
+            "feed"      => "https://cnm.mv/rss"
+        ],
+        "thiladhun" => [
+            "Service"    => "Thiladhun Media",
+            "feed"      => "https://thiladhun.com/feed"
+        ],
+        "faanooz" => [
+            "Service"    => "Faanooz Media",
+            "feed"      => "https://faanooz.com/feed"
+        ],
+        "addulive" => [
+            "Service"    => "Addulive Media",
+            "feed"      => "https://www.addulive.com/feed"
+        ],
+        "vaguthu" => [
+            "Service"    => "Vaguthu Media",
+            "feed"      => "https://vaguthu.mv/feed"
+        ],
+        "psm" => [
+            "Service"    => "PSM Media",
+            "feed"      => "https://psmnews.mv/feed"
+        ],
+        "vnews" => [
+            "Service"    => "Vnews Media",
+            "feed"      => "https://vnews.mv/rss"
+        ],
+        "dhuvas" => [
+            "Service"    => "Dhuvas Media",
+            "feed"      => "https://dhuvas.mv/feed"
+        ],
+        "feshun" => [
+            "Service"    => "Feshun Media",
+            "feed"      => "https://feshun.com/feed"
+        ],
+        "fenvaru" => [
+            "Service"    => "Fenvaru Media",
+            "feed"      => "https://www.fenvaru.com/feed"
+        ]
+    ];
+
     public function __construct();
 
-    /**
-     * mihaaru
-     *
-     * @return void
-     */
     public function mihaaru();
 
-    /**
-     * cnm
-     *
-     * @return void
-     */
     public function cnm();
 
-    /**
-     * thiladhun
-     *
-     * @return void
-     */
     public function thiladhun();
 
-    /**
-     * faanooz
-     *
-     * @return void
-     */
     public function faanooz();
 
-    /**
-     * addulive
-     *
-     * @return void
-     */
     public function addulive();
 
-    /**
-     * vaguthu
-     *
-     * @return void
-     */
     public function vaguthu();
 
-    /**
-     * psm
-     *
-     * @return void
-     */
     public function psm();
 
-    /**
-     * vnews
-     *
-     * @return void
-     */
     public function vnews();
 
-    /**
-     * dhuvas
-     *
-     * @return void
-     */
     public function dhuvas();
 
-    /**
-     * feshun
-     *
-     * @return void
-     */
     public function feshun();
 
-    /**
-     * fenvaru
-     *
-     * @return void
-     */
     public function fenvaru();
 }

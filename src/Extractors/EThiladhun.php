@@ -2,8 +2,7 @@
 /*
 
 
-░C░N░M░ ░S░c░r░a░p░e░r░
-
+░T░h░i░ l░a░d░h░u░n ░S░c░r░a░p░e░r░
 
 Todo:
 - add tags
@@ -15,7 +14,7 @@ namespace RssScraper\Extractors;
 use RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
 
-class ECnm implements IExtractor
+class EThiladhun implements IExtractor
 {
     protected $client;
 
@@ -26,7 +25,6 @@ class ECnm implements IExtractor
     protected $author;
     protected $date;
     protected $url;
-
 
     /**
      * __construct
@@ -45,48 +43,57 @@ class ECnm implements IExtractor
      * @param  mixed $date
      * @param  mixed $guid
      *
-     * @access public
-     *
      * @return array
+     * 
+     * @access public
      */
     public function extract($url, $date = null, $guid = null)
     {
+
+        $this->url = $url;
         $this->date = $date;
 
-        parse_str($url, $get_array);
+        $this->guid = $guid = str_replace("https://thiladhun.com/", "", $url);
 
-        $this->guid = $get_array["https://cnm_mv/f/?id"];
-
-        //Need to fix the url hang issue
-        $this->url = "https://cnm.mv/f/?id=" . $this->guid;
-
-        $crawler = $this->client->request('GET', $this->url);
-
+        $crawler = $this->client->request('GET', $url);
 
         $crawler->filter('h1')->each(function ($node) {
             $title = $node->text();
             $this->title = $title;
         });
 
-        $crawler->filter('img[alt*="image"]')->each(function ($node) {
-            $image = $node->attr('src');
-            $trimeddata = str_replace('../', '', $image);
-            $this->image = "https://cnm.mv/" . $trimeddata;
+        //Removing all the unnecessary a tags
+        $crawler->filter('div.single-body.entry-content.typography-copy a')->each(function ($nodes) {
+            foreach ($nodes as $node) {
+                $node->parentNode->removeChild($node);
+            }
         });
 
-        $crawler->filter('div[class*="col fontf artT px-0 py-4"]')->each(function ($node) {
+        $crawler->filter('div.single-body.entry-content.typography-copy')->each(function ($node) {
+
+            //Trimming unnecessary tabs and \n
             $content = $node->text();
-            $input = str_replace("\n", '', $content);
-            $this->content = $input;
+            $removeonelayer = str_replace("See author's posts", '', $content);
+            $removespace = str_replace("\r\n", '', $removeonelayer);
+            $removetab = str_replace("\t", '', $removespace);
+            $removeonespace = str_replace("\n", '', $removetab);
+            $this->content = $removeonespace;
         });
 
-        $crawler->filter('div[style*="margin-left:20px;padding-right:15px;"]')->each(function ($node) {
+        $crawler->filter('div[class*="entry-thumb single-entry-thumb"] img')->each(function ($node) {
+            $image = $node->attr('src');
+            $this->image = $image;
+        });
+
+
+        $crawler->filter('a[class*="entry-author__name"]')->each(function ($node) {
             $author = $node->text();
             $this->author = $author;
         });
 
+
         $data = [
-            "service" => "CNM News",
+            "service" => "Thiladhun News",
             "title" => $this->title,
             "image" => $this->image,
             "content" => $this->content,
@@ -96,7 +103,6 @@ class ECnm implements IExtractor
             "guid" => $this->guid,
             "word_count" => str_word_count($this->content)
         ];
-
 
         return $data;
     }

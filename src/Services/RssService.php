@@ -2,20 +2,15 @@
 
 namespace RssScraper\Services;
 
-use RssScraper\Utils\Util;
 use RssScraper\Http\Scraper;
 use RssScraper\Interfaces\IRssService;
 
-class RssService extends Util implements IRssService
+class RssService implements IRssService
 {
-    public static $items = array();
-
     protected $scraper;
 
     public function __construct()
     {
-        self::load('config');
-
         $scraper = new Scraper();
         $this->scraper = $scraper;
     }
@@ -27,29 +22,9 @@ class RssService extends Util implements IRssService
      */
     public function mihaaru()
     {
-
-        $rss = $this->scraper->get(self::$items['mihaaru']);
-
-        /* $title = $rss["channel"]["title"];
-        $link = $rss["channel"]["link"];
-        $version = $rss["@attributes"]["version"]; */
-        $article_number = count($rss["channel"]["item"]);
+        $rss = $this->scraper->get(IRssService::SERVICES['mihaaru']['feed']);
         $articles = $rss["channel"]["item"];
-
-        /* foreach ($articles as $article) {
-            $link = $article["link"] . "\n";
-
-            EMihaaru::extract($link);
-        } */
-
-        $article = $articles[0];
-
-        $link = $article["link"];
-        $date = $article["pubDate"];
-        $guid = $article["guid"];
-
-        $emihaaru = new \RssScraper\Extractors\EMihaaru;
-        return $emihaaru->extract($link, $date, $guid);
+        return \RssScraper\Services\SiteService\MihaaruService::dispatch($articles);
     }
 
     /**
@@ -59,17 +34,9 @@ class RssService extends Util implements IRssService
      */
     public function cnm()
     {
-        $rss = $this->scraper->get(self::$items['cnm']);
-
+        $rss = $this->scraper->get(IRssService::SERVICES['cnm']['feed']);
         $articles = $rss["channel"]["item"];
-
-        $article = $articles[0];
-
-        $link = $article["link"];
-        $date = $article["pubDate"];
-
-        $ecnm = new \RssScraper\Extractors\ECnm;
-        return $ecnm->extract($link,$date);
+        return \RssScraper\Services\SiteService\CnmService::dispatch($articles);
     }
 
     /**
@@ -79,7 +46,9 @@ class RssService extends Util implements IRssService
      */
     public function thiladhun()
     {
-        return $this->scraper->get(self::$items['thiladhun']);
+        $rss = $this->scraper->get(IRssService::SERVICES['thiladhun']['feed']);
+        $articles = $rss["channel"]["item"];
+        return \RssScraper\Services\SiteService\ThiladhunService::dispatch($articles);
     }
 
     /**
@@ -89,7 +58,9 @@ class RssService extends Util implements IRssService
      */
     public function faanooz()
     {
-        return $this->scraper->get(self::$items['faanooz']);
+        $rss = $this->scraper->get(IRssService::SERVICES['faanooz']['feed']);
+        $articles = $rss["channel"]["item"];
+        return \RssScraper\Services\SiteService\FaanoozService::dispatch($articles);
     }
 
     /**
@@ -99,7 +70,7 @@ class RssService extends Util implements IRssService
      */
     public function addulive()
     {
-        return $this->scraper->get(self::$items['addulive']);
+        return $this->scraper->get(IRssService::SERVICES['addulive']['feed']);
     }
 
     /**
@@ -109,7 +80,7 @@ class RssService extends Util implements IRssService
      */
     public function vaguthu()
     {
-        return $this->scraper->get(self::$items['vaguthu']);
+        return $this->scraper->get(IRssService::SERVICES['vaguthu']['feed']);
     }
 
     /**
@@ -119,7 +90,7 @@ class RssService extends Util implements IRssService
      */
     public function psm()
     {
-        return $this->scraper->get(self::$items['psm']);
+        return $this->scraper->get(IRssService::SERVICES['psm']['feed']);
     }
 
     /**
@@ -129,7 +100,7 @@ class RssService extends Util implements IRssService
      */
     public function vnews()
     {
-        return $this->scraper->get(self::$items['vnews']);
+        return $this->scraper->get(IRssService::SERVICES['vnews']['feed']);
     }
 
     /**
@@ -139,7 +110,7 @@ class RssService extends Util implements IRssService
      */
     public function dhuvas()
     {
-        return $this->scraper->get(self::$items['dhuvas']);
+        return $this->scraper->get(IRssService::SERVICES['dhuvas']['feed']);
     }
 
     /**
@@ -149,7 +120,7 @@ class RssService extends Util implements IRssService
      */
     public function feshun()
     {
-        return $this->scraper->get(self::$items['feshun']);
+        return $this->scraper->get(IRssService::SERVICES['feshun']['feed']);
     }
 
     /**
@@ -159,6 +130,8 @@ class RssService extends Util implements IRssService
      */
     public function fenvaru()
     {
-        return $this->scraper->get(self::$items['fenvaru']);
+        return $this->scraper->get(IRssService::SERVICES['fenvaru']['feed']);
     }
+
+    
 }

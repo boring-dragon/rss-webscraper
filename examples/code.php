@@ -4,6 +4,6 @@ require_once '../vendor/autoload.php';
 
 use RssScraper\Services\RssService;
 
-
 $rss = new RssService();
-dd($rss->mihaaru());
+//echo json_encode($rss->thiladhun(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+echo json_encode($rss->faanooz(), JSON_UNESCAPED_UNICODE);
