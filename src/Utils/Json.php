@@ -1,6 +1,6 @@
 <?php
 
-namespace RssScraper\Utils;
+namespace Jinas\RssScraper\Utils;
 
 class Json
 {

@@ -9,9 +9,9 @@ Todo:
 
 */
 
-namespace RssScraper\Extractors;
+namespace Jinas\RssScraper\Extractors;
 
-use RssScraper\Interfaces\IExtractor;
+use Jinas\RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
 
 class EThiladhun implements IExtractor

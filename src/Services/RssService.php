@@ -1,9 +1,9 @@
 <?php
 
-namespace RssScraper\Services;
+namespace Jinas\RssScraper\Services;
 
-use RssScraper\Http\Scraper;
-use RssScraper\Interfaces\IRssService;
+use Jinas\RssScraper\Http\Scraper;
+use Jinas\RssScraper\Interfaces\IRssService;
 
 class RssService implements IRssService
 {
@@ -24,7 +24,7 @@ class RssService implements IRssService
     {
         $rss = $this->scraper->get(IRssService::SERVICES['mihaaru']['feed']);
         $articles = $rss["channel"]["item"];
-        return \RssScraper\Services\SiteService\MihaaruService::dispatch($articles);
+        return \Jinas\RssScraper\Services\SiteService\MihaaruService::dispatch($articles);
     }
 
     /**
@@ -36,7 +36,7 @@ class RssService implements IRssService
     {
         $rss = $this->scraper->get(IRssService::SERVICES['cnm']['feed']);
         $articles = $rss["channel"]["item"];
-        return \RssScraper\Services\SiteService\CnmService::dispatch($articles);
+        return \Jinas\RssScraper\Services\SiteService\CnmService::dispatch($articles);
     }
 
     /**
@@ -48,7 +48,7 @@ class RssService implements IRssService
     {
         $rss = $this->scraper->get(IRssService::SERVICES['thiladhun']['feed']);
         $articles = $rss["channel"]["item"];
-        return \RssScraper\Services\SiteService\ThiladhunService::dispatch($articles);
+        return \Jinas\RssScraper\Services\SiteService\ThiladhunService::dispatch($articles);
     }
 
     /**
@@ -60,78 +60,7 @@ class RssService implements IRssService
     {
         $rss = $this->scraper->get(IRssService::SERVICES['faanooz']['feed']);
         $articles = $rss["channel"]["item"];
-        return \RssScraper\Services\SiteService\FaanoozService::dispatch($articles);
+        return \Jinas\RssScraper\Services\SiteService\FaanoozService::dispatch($articles);
     }
 
-    /**
-     * addulive
-     *
-     * @return void
-     */
-    public function addulive()
-    {
-        return $this->scraper->get(IRssService::SERVICES['addulive']['feed']);
-    }
-
-    /**
-     * vaguthu
-     *
-     * @return void
-     */
-    public function vaguthu()
-    {
-        return $this->scraper->get(IRssService::SERVICES['vaguthu']['feed']);
-    }
-
-    /**
-     * psm
-     *
-     * @return void
-     */
-    public function psm()
-    {
-        return $this->scraper->get(IRssService::SERVICES['psm']['feed']);
-    }
-
-    /**
-     * vnews
-     *
-     * @return void
-     */
-    public function vnews()
-    {
-        return $this->scraper->get(IRssService::SERVICES['vnews']['feed']);
-    }
-
-    /**
-     * dhuvas
-     *
-     * @return void
-     */
-    public function dhuvas()
-    {
-        return $this->scraper->get(IRssService::SERVICES['dhuvas']['feed']);
-    }
-
-    /**
-     * feshun
-     *
-     * @return void
-     */
-    public function feshun()
-    {
-        return $this->scraper->get(IRssService::SERVICES['feshun']['feed']);
-    }
-
-    /**
-     * fenvaru
-     *
-     * @return void
-     */
-    public function fenvaru()
-    {
-        return $this->scraper->get(IRssService::SERVICES['fenvaru']['feed']);
-    }
-
-    
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace RssScraper\Services\SiteService;
+namespace Jinas\RssScraper\Services\SiteService;
 
-use RssScraper\Interfaces\IService;
+use Jinas\RssScraper\Interfaces\IService;
 
 class FaanoozService implements IService
 {
@@ -10,7 +10,7 @@ class FaanoozService implements IService
     {
         $articlesitems = array();
 
-        $emihaaru = new \RssScraper\Extractors\EFaanooz;
+        $emihaaru = new \Jinas\RssScraper\Extractors\EFaanooz;
 
         foreach ($articles as $article) {
             $link = $article["link"];

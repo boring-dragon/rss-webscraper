@@ -1,6 +1,6 @@
 <?php
 
-namespace RssScraper\Interfaces;
+namespace Jinas\RssScraper\Interfaces;
 
 interface IRssService
 {
@@ -62,17 +62,4 @@ interface IRssService
 
     public function faanooz();
 
-    public function addulive();
-
-    public function vaguthu();
-
-    public function psm();
-
-    public function vnews();
-
-    public function dhuvas();
-
-    public function feshun();
-
-    public function fenvaru();
 }

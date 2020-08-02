@@ -1,8 +1,8 @@
 <?php
 
-namespace RssScraper\Http;
+namespace Jinas\RssScraper\Http;
 
-use RssScraper\Interfaces\IScraper;
+use Jinas\RssScraper\Interfaces\IScraper;
 use Zttp\Zttp;
 
 class Scraper implements IScraper

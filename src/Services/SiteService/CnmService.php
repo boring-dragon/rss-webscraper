@@ -1,7 +1,7 @@
 <?php
-namespace RssScraper\Services\SiteService;
+namespace Jinas\RssScraper\Services\SiteService;
 
-use RssScraper\Interfaces\IService;
+use Jinas\RssScraper\Interfaces\IService;
 
 class CnmService implements IService
 {
@@ -9,7 +9,7 @@ class CnmService implements IService
     {
         $articlesitems = array();
 
-        $ecnm = new \RssScraper\Extractors\ECnm;
+        $ecnm = new \Jinas\RssScraper\Extractors\ECnm;
         
         foreach ($articles as $article) {
             $link = str_replace('http://vfp.mv', 'https://cnm.mv', $article["link"]);

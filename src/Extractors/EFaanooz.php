@@ -7,11 +7,11 @@ Todo
 
 */
 
-namespace RssScraper\Extractors;
+namespace Jinas\RssScraper\Extractors;
 
-use RssScraper\Interfaces\IExtractor;
+use Jinas\RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
-use RssScraper\Utils\Json;
+use Jinas\RssScraper\Utils\Json;
 
 class EFaanooz implements IExtractor
 {

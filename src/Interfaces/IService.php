@@ -1,5 +1,5 @@
 <?php
-namespace RssScraper\Interfaces;
+namespace Jinas\RssScraper\Interfaces;
 
 interface IService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace RssScraper\Interfaces;
+namespace Jinas\RssScraper\Interfaces;
 
 use DateTime;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace RssScraper\Services\SiteService;
+namespace Jinas\RssScraper\Services\SiteService;
 
-use RssScraper\Interfaces\IService;
+use Jinas\RssScraper\Interfaces\IService;
 
 class ThiladhunService implements IService
 {
@@ -10,7 +10,7 @@ class ThiladhunService implements IService
     {
         $articlesitems = array();
 
-        $emihaaru = new \RssScraper\Extractors\EThiladhun;
+        $emihaaru = new \Jinas\RssScraper\Extractors\EThiladhun;
 
         foreach ($articles as $article) {
             $link = $article["link"];
