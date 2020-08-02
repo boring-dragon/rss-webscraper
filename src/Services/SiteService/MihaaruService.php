@@ -1,4 +1,5 @@
 <?php
+
 namespace Jinas\RssScraper\Services\SiteService;
 
 use Jinas\RssScraper\Interfaces\IService;
@@ -6,22 +7,22 @@ use Jinas\RssScraper\Interfaces\IService;
 class MihaaruService implements IService
 {
     /**
-     * dispatch
+     * dispatch.
      *
-     * @param  mixed $articles
+     * @param mixed $articles
      *
      * @return array
      */
     public static function dispatch(array $articles = [])
     {
-        $articlesitems = array();
+        $articlesitems = [];
 
-        $emihaaru = new \Jinas\RssScraper\Extractors\EMihaaru;
+        $emihaaru = new \Jinas\RssScraper\Extractors\EMihaaru();
 
         foreach ($articles as $article) {
-            $link = $article["link"];
-            $date = $article["pubDate"];
-            $guid = $article["guid"];
+            $link = $article['link'];
+            $date = $article['pubDate'];
+            $guid = $article['guid'];
             $articlesitems[] = $emihaaru->extract($link, $date, $guid);
         }
 

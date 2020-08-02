@@ -11,9 +11,8 @@ TODOs:
 
 namespace Jinas\RssScraper\Extractors;
 
-use Jinas\RssScraper\Interfaces\IExtractor;
 use Goutte\Client;
-use Jinas\RssScraper\Utils\Json;
+use Jinas\RssScraper\Interfaces\IExtractor;
 
 class EMihaaru implements IExtractor
 {
@@ -22,15 +21,14 @@ class EMihaaru implements IExtractor
     protected $title;
     protected $content;
     protected $image;
-    protected $tags = array();
+    protected $tags = [];
     protected $guid;
     protected $author;
     protected $date;
     protected $url;
 
-
     /**
-     * __construct
+     * __construct.
      *
      * @return void
      */
@@ -40,14 +38,13 @@ class EMihaaru implements IExtractor
     }
 
     /**
-     * extract
+     * extract.
      *
      * Mihaaru News Extractor. This function scraps title,content,author and date from the article
-     * @param  mixed $url
-     * @param  mixed $date
-     * @param  mixed $guid
      *
-     * @access public
+     * @param mixed $url
+     * @param mixed $date
+     * @param mixed $guid
      *
      * @return array
      */
@@ -59,7 +56,6 @@ class EMihaaru implements IExtractor
 
         $crawler = $this->client->request('GET', $url);
 
-
         $crawler->filter('h1')->each(function ($node) {
             $title = $node->text();
             $this->title = $title;
@@ -69,7 +65,6 @@ class EMihaaru implements IExtractor
             $image = $node->attr('src');
             $this->image = $image;
         });
-
 
         $crawler->filter('.by-line address')->each(function ($node) {
             $author = $node->text();
@@ -81,28 +76,28 @@ class EMihaaru implements IExtractor
         });
 
         $crawler->filter('article')->each(function ($node) {
-            $content =  $node->text();
+            $content = $node->text();
 
             $input = str_replace("\n", '', $content);
             $this->content = $input;
         });
 
         $crawler->filter('.article-tags')->each(function ($node) {
-            $tags[] =  $node->text();
+            $tags[] = $node->text();
             $this->tags[] = $tags;
         });
 
         $data = [
-            "service" => "Mihaaru News",
-            "title" => $this->title,
-            "image" => $this->image,
-            "content" => $this->content,
-            "date" => $this->date,
-            "url" => $this->url,
-            "author" => $this->author,
-            "guid" => $this->guid,
-            "word_count" => str_word_count($this->content),
-            "tags" => $this->tags
+            'service'    => 'Mihaaru News',
+            'title'      => $this->title,
+            'image'      => $this->image,
+            'content'    => $this->content,
+            'date'       => $this->date,
+            'url'        => $this->url,
+            'author'     => $this->author,
+            'guid'       => $this->guid,
+            'word_count' => str_word_count($this->content),
+            'tags'       => $this->tags,
         ];
 
         //$data = Data::

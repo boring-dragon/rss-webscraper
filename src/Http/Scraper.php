@@ -14,7 +14,7 @@ class Scraper implements IScraper
         if (!$response->isOk()) {
             throw new \Exception('Error getting the rss feed');
         }
-        
+
         $xmlfile = $response->body();
         $ob = simplexml_load_string($xmlfile);
         $json = json_encode($ob);
