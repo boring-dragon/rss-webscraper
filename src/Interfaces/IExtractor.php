@@ -6,14 +6,12 @@ use DateTime;
 
 interface IExtractor
 {
-
-
     /**
-     * extract
+     * extract.
      *
-     * @param  mixed $url
-     * @param  mixed $date
-     * @param  mixed $guid
+     * @param mixed $url
+     * @param mixed $date
+     * @param mixed $guid
      *
      * @return array
      */

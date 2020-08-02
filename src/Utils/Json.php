@@ -5,9 +5,9 @@ namespace Jinas\RssScraper\Utils;
 class Json
 {
     /**
-     * encode
+     * encode.
      *
-     * @param  mixed $data
+     * @param mixed $data
      *
      * @return void
      */

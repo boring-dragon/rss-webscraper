@@ -1,12 +1,13 @@
 <?php
+
 namespace Jinas\RssScraper\Interfaces;
 
 interface IService
 {
     /**
-     * dispatch
+     * dispatch.
      *
-     * @param  mixed $articles
+     * @param mixed $articles
      *
      * @return void
      */
