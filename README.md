@@ -4,7 +4,7 @@
 
 Tool that reads rss from dhivehi news sites and scrape the latest news articles.
 
-This tool was built a year ago. There might be few bugs here and there but I will try to improve and look into those later.
+This tool was built 6 months ago. There might be few bugs here and there but I will try to improve and look into those later.
 
 ## Usage
 
