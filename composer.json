@@ -1,6 +1,6 @@
 {
-    "name": "jinas/rssscraper",
-    "description": "Avas scraper",
+    "name": "jinas/rss-webscraper",
+    "description": "Tool that reads rss from dhivehi news sites and scrape the latest news articles.",
     "license": "MIT",
     "authors": [
         {
